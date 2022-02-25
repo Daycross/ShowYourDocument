@@ -1,0 +1,34 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  color: $gray-darken;
+}
+
+body, input, button, textarea {
+  font: 400 16px 'Open Sans', sans-serif;
+}
+
+h1, h2, h3{
+  color: $foxfly-color-darken;
+  font-family: 'Open Sans', sans-serif;
+}
+
+h2{
+  font-size: toRem(36);
+}
+
+h3{
+  font-size: toRem(18);
+}
+
+p {
+  font-size: toRem(18);
+}

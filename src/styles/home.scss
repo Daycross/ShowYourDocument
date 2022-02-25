@@ -1,0 +1,160 @@
+@import "./variables.scss";
+@import "./mixins.scss";
+
+#general{
+  max-width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+
+  aside{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: toRem(112);
+    width: 100%;
+    padding: 0 toRem(24);
+
+    background-color: $foxfly-color-lighten;
+
+    img{
+      height: toRem(77);
+    }
+  }
+
+  .mainContent{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    &-introduction{
+      display: flex;
+      .text{
+        display: flex;
+        flex-direction: column;
+        align-items: left;
+
+        padding: toRem(64);
+        max-height: toRem(320);
+
+        p{
+          padding-top: toRem(24);
+        }
+      }
+      img{
+        max-height: toRem(320);
+        max-width: toRem(744);
+        
+      }
+    }
+
+    &-carousel{
+      margin-top: toRem(40);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-showData{
+      margin-top: toRem(32);
+      padding: toRem(39) toRem(63);
+
+      display: flex;
+      align-items: top;
+      justify-content: space-between;
+
+      width: 100%;
+      max-width: toRem(1168);
+      max-height: toRem(600);
+
+      border: solid 1px $foxfly-color-darken;
+      border-radius: toRem(10);
+
+      h3{
+        margin-bottom: toRem(8);
+      }
+
+      .showData-doc{
+        display: flex;
+        flex-direction: column;
+
+        width: 40%;
+        height: toRem(440);
+      }
+
+      .showData-info{
+        display: flex;
+        flex-direction: column;
+
+        width: 50%;
+        height: 100%;
+
+        &JSON{
+          padding: toRem(24);
+          height: 100%;
+
+          border: solid 1px $foxfly-color-darken;
+          border-radius: toRem(10);
+
+          overflow-y: scroll;
+        }
+      }
+    }
+
+   &-uploadImage{
+    margin: toRem(40) 0 toRem(110) 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: toRem(1168);
+    width: 100%;
+
+    &_content{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      margin-top: toRem(31);
+      
+      height: toRem(500);
+      width: 100%;
+
+      border: dashed 3px $foxfly-color-medium;
+      border-radius: toRem(10);
+      background-color: #f0f0f0;
+
+      cursor: pointer;
+
+      transition: all 0.1s ease-in; 
+
+      &:hover{
+        form{
+          h3{
+            text-decoration: underline;
+          }
+        }
+        opacity: 70%;
+      }
+      
+      h3{
+        margin-top: toRem(16);
+
+        max-width: toRem(180);
+
+        color: $foxfly-color-medium;
+        text-align: center;
+      }
+    }
+    input{
+      visibility: hidden;
+    }
+   } 
+  }
+}
