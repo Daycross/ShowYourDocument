@@ -159,17 +159,12 @@
 
       button{
         background: #fff;
-        border: 1px solid $foxfly-color-medium;
-        border-radius: 5px;
+        border: 0;
+        border-radius: 50%;
         height: 40px;
-        width: 200px;
-        transition: opacity 0.2s ease-in;
+        width: 40px;
 
         cursor: pointer; 
-
-        &:hover{
-          opacity: 0.9;
-        }
       }
     }
     input{

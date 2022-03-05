@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
-import { api } from '../services/api';
+import {api, apiConfig} from '../services/api';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -31,6 +31,8 @@ export function Home(){
   }
   
   async function handleSendImage(){   
+    console.log(apiConfig);
+
     const image = selectedFile;
     if(!image){
       return
@@ -47,8 +49,8 @@ export function Home(){
     const response = await api.post('/image?application=teste', data, config)
 
     setInfoJson(response.data?.predictions);
-    setShowButton(!showButton);
-    setTempImage( await getBase64(image));
+    setTempImage( await getBase64(image))
+    setShowButton(!showButton)
   }
 
   return(
@@ -102,7 +104,7 @@ export function Home(){
 
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          {showButton === false ?  
+          {!selectedFile && showButton === false ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
@@ -110,7 +112,6 @@ export function Home(){
                 if(event.target.files){
                   console.log('Peguei a imagem')
                   setSelectedFile(event.target.files[0]);
-                  setShowButton(!showButton);
                 }
               }}/>
             </label>   

@@ -47,8 +47,9 @@ export function Home(){
     const response = await api.post('/image?application=teste', data, config)
 
     setInfoJson(response.data?.predictions);
-    setShowButton(!showButton);
-    setTempImage( await getBase64(image));
+    setShowButton(!showButton)
+    setTempImage( await getBase64(image))
+    
   }
 
   return(
@@ -102,7 +103,7 @@ export function Home(){
 
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          {showButton === false ?  
+          {!selectedFile && showButton === false ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
@@ -110,7 +111,6 @@ export function Home(){
                 if(event.target.files){
                   console.log('Peguei a imagem')
                   setSelectedFile(event.target.files[0]);
-                  setShowButton(!showButton);
                 }
               }}/>
             </label>   

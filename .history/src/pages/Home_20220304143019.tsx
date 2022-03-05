@@ -110,7 +110,6 @@ export function Home(){
                 if(event.target.files){
                   console.log('Peguei a imagem')
                   setSelectedFile(event.target.files[0]);
-                  setShowButton(!showButton);
                 }
               }}/>
             </label>   

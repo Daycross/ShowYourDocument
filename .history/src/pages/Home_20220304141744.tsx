@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
-import { api } from '../services/api';
+import {api, apiConfig} from '../services/api';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -18,7 +18,6 @@ export function Home(){
 	// const [isFilePicked, setIsFilePicked] = useState(false);
   const [tempImage, setTempImage] = useState('');
   const [infoJson, setInfoJson] = useState([{}]);
-  const [showButton, setShowButton] = useState(false);
   const images = exportImages();
 
   function getBase64(file: File) {
@@ -31,6 +30,8 @@ export function Home(){
   }
   
   async function handleSendImage(){   
+    console.log(apiConfig);
+
     const image = selectedFile;
     if(!image){
       return
@@ -47,8 +48,7 @@ export function Home(){
     const response = await api.post('/image?application=teste', data, config)
 
     setInfoJson(response.data?.predictions);
-    setShowButton(!showButton);
-    setTempImage( await getBase64(image));
+    setTempImage( await getBase64(image))
   }
 
   return(
@@ -71,7 +71,7 @@ export function Home(){
         </div>
 
         <div className="mainContent-carousel">
-        <Carousel autoPlay={true} infiniteLoop={true}  width={600}>
+        <Carousel autoPlay={true} infiniteLoop={true} dynamicHeight={true} width={600}>
             <div onClick={() => console.log('oi')}>
               <img  src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
@@ -102,7 +102,7 @@ export function Home(){
 
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          {showButton === false ?  
+          {!selectedFile ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
@@ -110,15 +110,17 @@ export function Home(){
                 if(event.target.files){
                   console.log('Peguei a imagem')
                   setSelectedFile(event.target.files[0]);
-                  setShowButton(!showButton);
                 }
               }}/>
             </label>   
           :
           <label htmlFor="files" className="mainContent-uploadImage_content">
-            <button id='files' onClick={handleSendImage}>Enviar Imagem</button>
-          </label> 
+            <button onClick={handleSendImage}></button>
+          </label>
+          
+              
           }
+                   
         </div>
       </main>
     </div>

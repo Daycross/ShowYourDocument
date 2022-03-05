@@ -86,7 +86,7 @@
         height: toRem(440);
 
         > img {
-          max-height: toRem(440);
+          max-height: 90%;
           width: auto;
         }
       }
@@ -155,21 +155,6 @@
 
         color: $foxfly-color-medium;
         text-align: center;
-      }
-
-      button{
-        background: #fff;
-        border: 1px solid $foxfly-color-medium;
-        border-radius: 5px;
-        height: 40px;
-        width: 200px;
-        transition: opacity 0.2s ease-in;
-
-        cursor: pointer; 
-
-        &:hover{
-          opacity: 0.9;
-        }
       }
     }
     input{

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 
-import { api } from '../services/api';
+import api from '../services/api';
 
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
@@ -15,40 +15,29 @@ type targetProps = {
 
 export function Home(){
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
-	// const [isFilePicked, setIsFilePicked] = useState(false);
-  const [tempImage, setTempImage] = useState('');
-  const [infoJson, setInfoJson] = useState([{}]);
-  const [showButton, setShowButton] = useState(false);
+	const [isFilePicked, setIsFilePicked] = useState(false);
   const images = exportImages();
 
-  function getBase64(file: File) {
-    return new Promise<any>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result);
-      reader.onerror = error => reject(error);
-    });
-  }
+	// 	setSelectedFile(event.target.value);
+	// 	setIsFilePicked(true);
+
+	// };
   
-  async function handleSendImage(){   
-    const image = selectedFile;
-    if(!image){
-      return
-    }
-    const data = new FormData();
-    data.append('file', image, image.name);
+  async function handleSendImage(){
+
+    let data = new FormData();
+    const image:any = selectedFile;
+
+    data.append('file', image, selectedFile?.name);
   
     const config = {
       headers : {
-        'Prediction-Key' : '7d62cabb7bcd47d388f84823d8792980'
+        'Content-Type' : 'multipart/form-data'
       }
     }
 
-    const response = await api.post('/image?application=teste', data, config)
-
-    setInfoJson(response.data?.predictions);
-    setShowButton(!showButton);
-    setTempImage( await getBase64(image));
+    const response = await api.post('/', selectedFile, config)
+    console.log(response);
   }
 
   return(
@@ -71,18 +60,18 @@ export function Home(){
         </div>
 
         <div className="mainContent-carousel">
-        <Carousel autoPlay={true} infiniteLoop={true}  width={600}>
-            <div onClick={() => console.log('oi')}>
-              <img  src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
+        <Carousel autoPlay={true} infiniteLoop={true}>
+            <div>
+              <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
             <div>
-              <img src={images[2]} alt="Imagem de exemplo dos documentos brasileiros" />
+              <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
             <div>
-              <img src={images[3]} alt="Imagem de exemplo dos documentos brasileiros" />
+              <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
             <div>
-              <img src={images[4]} alt="Imagem de exemplo dos documentos brasileiros" />
+              <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
           </Carousel>
         </div>
@@ -90,19 +79,18 @@ export function Home(){
         <div className="mainContent-showData">
           <div className="showData-doc">
             <h3>Documento</h3>
-            <img src={tempImage} alt="imagem do documento" />
+            <img src="#" alt="imagem do documento" />
           </div>
           <div className="showData-info">
             <h3>Dados</h3>
             <div className="showData-infoJSON">
-              <pre>{JSON.stringify(infoJson, null, 2)}</pre>
+              <p>Dados Aqui</p>
             </div>
           </div>
         </div>
 
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          {showButton === false ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
@@ -110,17 +98,12 @@ export function Home(){
                 if(event.target.files){
                   console.log('Peguei a imagem')
                   setSelectedFile(event.target.files[0]);
-                  setShowButton(!showButton);
                 }
               }}/>
-            </label>   
-          :
-          <label htmlFor="files" className="mainContent-uploadImage_content">
-            <button id='files' onClick={handleSendImage}>Enviar Imagem</button>
-          </label> 
-          }
+            </label>          
         </div>
       </main>
+      <button onClick={handleSendImage}></button>
     </div>
   );
 }
