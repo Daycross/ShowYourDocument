@@ -21,16 +21,6 @@ export function Home(){
   const [showButton, setShowButton] = useState(false);
   const images = exportImages();
 
-  //Objeto para tradução das propriedades da API
-  const translatedInfo = {
-    probabilidade: '',
-    documento: '',
-  }
-
-  const erro = {
-    erro: 'A imagem não é um documento válido'
-  }
-
   //Função que transforma o File em uma imagem base64
   function getBase64(file: File) {
     return new Promise<any>((resolve, reject) => {
@@ -62,19 +52,18 @@ export function Home(){
     const response = await api.post('/image?application=teste', data, config)
 
     //Filtro para pegar somente o Objeto com maior probabilidade
-    const imageJSON = await response.data?.predictions.filter((teste: any) => teste.probability > 0.6 && teste.tagName !== "Negative");
-    if(imageJSON.length < 1) {
-      setInfoJson(erro.erro);
-      setShowButton(!showButton);
-      return
-    }
+    const imageJSON = await response.data?.predictions.filter((teste: any) => teste.probability > 0.6);
     console.log(imageJSON);
     //Desestruturação do Objeto para usar somente duas propriedades com uma função que chama ela mesma 
     const pickedProps = (({ probability, tagName }) => {
       return { probability, tagName }
     })(imageJSON[0]);
     console.log(pickedProps);
-
+    //Objeto para tradução das propriedades da API
+    const translatedInfo = {
+      probabilidade: '',
+      documento: '',
+    }
     //Tradução das propriedades da API
     translatedInfo.probabilidade = `${(pickedProps.probability * 100).toFixed(0)}%`;
     translatedInfo.documento = pickedProps.tagName;

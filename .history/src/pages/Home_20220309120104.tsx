@@ -62,12 +62,7 @@ export function Home(){
     const response = await api.post('/image?application=teste', data, config)
 
     //Filtro para pegar somente o Objeto com maior probabilidade
-    const imageJSON = await response.data?.predictions.filter((teste: any) => teste.probability > 0.6 && teste.tagName !== "Negative");
-    if(imageJSON.length < 1) {
-      setInfoJson(erro.erro);
-      setShowButton(!showButton);
-      return
-    }
+    const imageJSON = await response.data?.predictions.filter((teste: any) => teste.probability > 0.6);
     console.log(imageJSON);
     //Desestruturação do Objeto para usar somente duas propriedades com uma função que chama ela mesma 
     const pickedProps = (({ probability, tagName }) => {
@@ -75,6 +70,12 @@ export function Home(){
     })(imageJSON[0]);
     console.log(pickedProps);
 
+    if(pickedProps.probability < 0.6 || pickedProps.tagName === 'Negative'){
+      setInfoJson(erro.erro);
+      setShowButton(!showButton);
+      return
+    }
+    
     //Tradução das propriedades da API
     translatedInfo.probabilidade = `${(pickedProps.probability * 100).toFixed(0)}%`;
     translatedInfo.documento = pickedProps.tagName;

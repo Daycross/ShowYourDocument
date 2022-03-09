@@ -101,7 +101,9 @@ export function Home(){
             </p>
             <p> Teste agora :) </p>
           </div>
-          <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
+          <div className="image-blur">
+            <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
+          </div>
         </div>
 
         {/* <div className="mainContent-carousel">

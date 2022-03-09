@@ -1,5 +1,5 @@
 import { useState } from 'react';
-// import { Carousel } from 'react-responsive-carousel';
+import { Carousel } from 'react-responsive-carousel';
 
 import { api } from '../services/api';
 
@@ -17,19 +17,9 @@ export function Home(){
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
 	// const [isFilePicked, setIsFilePicked] = useState(false);
   const [tempImage, setTempImage] = useState('');
-  const [infoJson, setInfoJson] = useState<Object>();
+  const [infoJson, setInfoJson] = useState([{}]);
   const [showButton, setShowButton] = useState(false);
   const images = exportImages();
-
-  //Objeto para tradução das propriedades da API
-  const translatedInfo = {
-    probabilidade: '',
-    documento: '',
-  }
-
-  const erro = {
-    erro: 'A imagem não é um documento válido'
-  }
 
   //Função que transforma o File em uma imagem base64
   function getBase64(file: File) {
@@ -61,24 +51,9 @@ export function Home(){
     //POST com axios
     const response = await api.post('/image?application=teste', data, config)
 
-    //Filtro para pegar somente o Objeto com maior probabilidade
-    const imageJSON = await response.data?.predictions.filter((teste: any) => teste.probability > 0.6 && teste.tagName !== "Negative");
-    if(imageJSON.length < 1) {
-      setInfoJson(erro.erro);
-      setShowButton(!showButton);
-      return
-    }
-    console.log(imageJSON);
-    //Desestruturação do Objeto para usar somente duas propriedades com uma função que chama ela mesma 
-    const pickedProps = (({ probability, tagName }) => {
-      return { probability, tagName }
-    })(imageJSON[0]);
-    console.log(pickedProps);
-
-    //Tradução das propriedades da API
-    translatedInfo.probabilidade = `${(pickedProps.probability * 100).toFixed(0)}%`;
-    translatedInfo.documento = pickedProps.tagName;
-    setInfoJson(translatedInfo);
+    //Estado que Pega a informação entregue pela API da Imagem em JSON
+    // const imageJSON = response.data?.predictions.filter((teste: JSON) => teste.)
+    setInfoJson(response.data?.predictions);
     //Estado que controla o botão de enviar ou adicionar imagem
     setShowButton(!showButton);
     //Estado que armazena a foto enviada em Base64 para possível uso pelo front
@@ -104,8 +79,8 @@ export function Home(){
           <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
         </div>
 
-        {/* <div className="mainContent-carousel">
-          <Carousel autoPlay={true} infiniteLoop={true}  width={600}>
+        <div className="mainContent-carousel">
+        <Carousel autoPlay={true} infiniteLoop={true}  width={600}>
             <div onClick={() => console.log('oi')}>
               <img  src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
@@ -119,7 +94,7 @@ export function Home(){
               <img src={images[4]} alt="Imagem de exemplo dos documentos brasileiros" />
             </div>
           </Carousel>
-        </div> */}
+        </div>
 
         <div className="mainContent-showData">
           <div className="showData-doc">

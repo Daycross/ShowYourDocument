@@ -1,6 +1,5 @@
 {
   "name": "showyourdocument",
-  "homepage": "https://foxfly.com.br/foximages",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

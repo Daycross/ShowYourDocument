@@ -7,7 +7,7 @@ const apiConfig = {
 }
 
 const api = axios.create({
-  baseURL: `https://southcentralus.api.cognitive.microsoft.com/customvision/v3.1/prediction/c1532ae6-4dd9-46ef-baf6-c03863964c6c/classify/iterations/Iteration12`,
+  baseURL: `https://southcentralus.api.cognitive.microsoft.com/customvision/v3.1/prediction/${apiConfig.projectId}/classify/iterations/${apiConfig.publishedName}`,
   });
 
-export { api, apiConfig };
+export {api, apiConfig};

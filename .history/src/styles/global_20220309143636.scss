@@ -9,16 +9,16 @@
 
 body {
   background: #2f3330;
-  color: white;
+  color: $gray-darken;
 }
 
-body, input, button, textarea, p {
+body, input, button, textarea {
   font: 400 16px 'Open Sans', sans-serif;
 }
 
 h1, h2, h3{
   color: $foxfly-color-darken;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h2{

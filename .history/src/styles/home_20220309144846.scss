@@ -46,10 +46,7 @@
       img{
         max-height: toRem(320);
         max-width: toRem(744);
-
-        border-radius: 0 0 0 5px;
-        border: 3px inset rgba(47, 51, 48, 0.1);
-        border-top: 0;
+        
       }
     }
 
@@ -107,7 +104,7 @@
 
           border: solid 1px $foxfly-color-darken;
           border-radius: toRem(10);
-          background-color:#524b4b;
+          background-color: #524b4b;
 
           overflow-y: scroll;
         }
@@ -132,7 +129,7 @@
 
       margin-top: toRem(31);
       
-      height: toRem(300);
+      height: toRem(500);
       width: 100%;
 
       border: dashed 3px $foxfly-color-medium;
