@@ -17,16 +17,6 @@ type targetProps = {
 
 type ServerError = { errorMessage: string };
 
-// type responseProps = {
-//   hit: Number,
-//   region: String,
-//   type: String,
-//   return: { 
-//     code: Number, 
-//     message: String
-//   }
-// }
-
 export function Home(){
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
 	// const [isFilePicked, setIsFilePicked] = useState(false);
@@ -64,11 +54,12 @@ export function Home(){
     if(!image){
       return
     }
-    // executa a função que transforma a imagem em Base64
+
+    // executa a função que tranforma a imagem em Base64
     const apiImage = await getBase64(image)
     const newApiImage = await apiImage.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "")
 
-    return { newApiImage, apiImage };
+    return newApiImage;
   }
 
   async function postImage(data: any){
@@ -81,6 +72,7 @@ export function Home(){
     try {
       //POST com axios
       const res = await api.post('/fxType?code=NixJacw2taGwZQcXF3R3cBGYYMLAkRwCvzan38YAi7OdHzFjKxZWig==', data, config)
+      console.log(res.data);
       response = res.data;
     } catch (error) {
       setInfoJson(erro.erro);
@@ -93,7 +85,7 @@ export function Home(){
           return
         }
       } 
-      console.log({ errorMessage: "Erro base" });
+      console.log({ errorMessage: "Kuch to ghotala h" });
       return
     }
       return response;
@@ -103,21 +95,21 @@ export function Home(){
   async function handleSendImage(){
     setIsLoading(true);
 
-    const parsedImage = await parseImage();
+    const parsedImage = parseImage();
     //Criando um JSON Data para enviar a imagem pelo Axios
     const data = JSON.stringify({
         "file_name": image?.name, 
-        "image": parsedImage?.newApiImage
+        "image": parsedImage
     });
     console.log(data);
 
-    const response: any = await postImage(data);
+    const response = postImage(data);
     console.log(response)
 
     // Desestruturação do Objeto para usar somente duas propriedades com uma função que chama ela mesma 
     const pickedProps = (({ hit, type }) => {
       return { hit, type }
-    })(response);
+    })(response.data.);
     console.log(pickedProps);
 
     //Tradução das propriedades da API
@@ -128,7 +120,7 @@ export function Home(){
     setIsLoading(false);
     setShowButton(!showButton);
     //Estado que armazena a foto enviada em Base64 para possível uso pelo front
-    setTempImage(parsedImage?.apiImage);
+    setTempImage( await parsedImage);
   }
 
   return(
@@ -207,11 +199,6 @@ export function Home(){
             <button id='files' onClick={handleSendImage}>Enviar Imagem</button>
           </label> 
           }
-        </div>
-
-        <div className="mainContent-ocr">
-          <h3>OCR</h3>
-          <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
       </main>
     </div>

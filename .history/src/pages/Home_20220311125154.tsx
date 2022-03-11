@@ -210,7 +210,6 @@ export function Home(){
         </div>
 
         <div className="mainContent-ocr">
-          <h3>OCR</h3>
           <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
       </main>

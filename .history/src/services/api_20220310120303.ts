@@ -7,7 +7,7 @@ const apiConfig = {
 }
 
 const api = axios.create({
-  baseURL: `https://fximages.azurewebsites.net/api`,
+  baseURL: `https://fximages.azurewebsites.net/api/`,
   });
 
 export { api, apiConfig };

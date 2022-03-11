@@ -17,15 +17,15 @@ type targetProps = {
 
 type ServerError = { errorMessage: string };
 
-// type responseProps = {
-//   hit: Number,
-//   region: String,
-//   type: String,
-//   return: { 
-//     code: Number, 
-//     message: String
-//   }
-// }
+type responseProps = {
+  hit: Number,
+  region: String,
+  type: String,
+  return: { 
+    code: Number, 
+    message: String
+  }
+}
 
 export function Home(){
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
@@ -64,11 +64,12 @@ export function Home(){
     if(!image){
       return
     }
-    // executa a função que transforma a imagem em Base64
+
+    // executa a função que tranforma a imagem em Base64
     const apiImage = await getBase64(image)
     const newApiImage = await apiImage.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "")
 
-    return { newApiImage, apiImage };
+    return newApiImage;
   }
 
   async function postImage(data: any){
@@ -107,7 +108,7 @@ export function Home(){
     //Criando um JSON Data para enviar a imagem pelo Axios
     const data = JSON.stringify({
         "file_name": image?.name, 
-        "image": parsedImage?.newApiImage
+        "image": parsedImage
     });
     console.log(data);
 
@@ -128,7 +129,7 @@ export function Home(){
     setIsLoading(false);
     setShowButton(!showButton);
     //Estado que armazena a foto enviada em Base64 para possível uso pelo front
-    setTempImage(parsedImage?.apiImage);
+    setTempImage(parsedImage);
   }
 
   return(
@@ -207,11 +208,6 @@ export function Home(){
             <button id='files' onClick={handleSendImage}>Enviar Imagem</button>
           </label> 
           }
-        </div>
-
-        <div className="mainContent-ocr">
-          <h3>OCR</h3>
-          <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
       </main>
     </div>

@@ -107,7 +107,7 @@ export function Home(){
     //Criando um JSON Data para enviar a imagem pelo Axios
     const data = JSON.stringify({
         "file_name": image?.name, 
-        "image": parsedImage?.newApiImage
+        "image": parsedImage
     });
     console.log(data);
 
@@ -128,7 +128,7 @@ export function Home(){
     setIsLoading(false);
     setShowButton(!showButton);
     //Estado que armazena a foto enviada em Base64 para possível uso pelo front
-    setTempImage(parsedImage?.apiImage);
+    setTempImage(parsedImage);
   }
 
   return(
@@ -207,11 +207,6 @@ export function Home(){
             <button id='files' onClick={handleSendImage}>Enviar Imagem</button>
           </label> 
           }
-        </div>
-
-        <div className="mainContent-ocr">
-          <h3>OCR</h3>
-          <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
       </main>
     </div>

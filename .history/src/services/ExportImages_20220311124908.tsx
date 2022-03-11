@@ -6,11 +6,10 @@ import rgSecondaryImage from '../assets/images/rgSecondaryImage.png'
 import leftArrow from '../assets/images/leftArrow.svg'
 import rightArrow from '../assets/images/rightArrow.svg'
 import uploadIcon from '../assets/images/uploadIcon.svg'
-import ocr from '../assets/images/ocr.jpg';
 
 export function exportImages(){
   const imagesArray = [
-    foxFlyLogo, headerDoc, cpfImage, rgImage, rgSecondaryImage, leftArrow, rightArrow, uploadIcon, ocr
+    foxFlyLogo, headerDoc, cpfImage, rgImage, rgSecondaryImage, leftArrow, rightArrow, uploadIcon
   ]
 
   return imagesArray;

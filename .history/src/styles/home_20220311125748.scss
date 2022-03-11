@@ -120,7 +120,7 @@
     }
 
    &-uploadImage{
-    margin: toRem(40) 0 toRem(80) 0;
+    margin: toRem(40) 0 toRem(40) 0;
 
     display: flex;
     flex-direction: column;
@@ -187,13 +187,11 @@
    } 
 
    &-ocr {
+    margin-bottom: 6.875rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-
-    margin-bottom: toRem(110);
-    
-    max-width: toRem(1168);
+    max-width: 73rem;
     width: 100%;
 
     img{
