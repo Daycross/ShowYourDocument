@@ -37,7 +37,7 @@
         flex-direction: column;
         align-items: left;
 
-        padding: toRem(64) toRem(64) toRem(64) 0;
+        padding: toRem(64);
         // max-height: toRem(320);
 
         p{
@@ -116,6 +116,7 @@
 
           border: solid 1px $foxfly-color-darken;
           border-radius: toRem(10);
+          background-color:#524b4b;
 
           overflow-y: scroll;
         }

@@ -17,6 +17,11 @@ type targetProps = {
 
 type ServerError = { errorMessage: string };
 
+type infoProps = { 
+  documento: string,
+  probabilidade: string
+}
+
 // type responseProps = {
 //   hit: Number,
 //   region: String,
@@ -32,7 +37,7 @@ export function Home(){
 	const [selectedFileOcr, setSelectedFileOcr] = useState<File | undefined>();
   const [tempImage, setTempImage] = useState('');
   const [tempImageOcr, setTempImageOcr] = useState('');
-  const [infoJson, setInfoJson] = useState<any>();
+  const [infoJson, setInfoJson] = useState<infoProps>();
   const [infoJsonOcr, setInfoJsonOcr] = useState<Object>();
   const [showButton, setShowButton] = useState(false);
   const [showButtonOcr, setShowButtonOcr] = useState(false);
@@ -276,7 +281,7 @@ export function Home(){
           <div className="showData-info">
             <h3>Tipificação</h3>
             <div className="showData-infoJSON">
-              <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
+              <p>{`Documento:${infoJson}`}</p>
             </div>
           </div>
         </div>
@@ -286,7 +291,6 @@ export function Home(){
           <h2>Extração de dados</h2>
           <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
-        <button onClick={() => console.log(infoJson)}></button>
         {/* <div className="mainContent-showData">
           <div className="showData-doc">
             <h3>Documento</h3>

@@ -32,7 +32,7 @@ export function Home(){
 	const [selectedFileOcr, setSelectedFileOcr] = useState<File | undefined>();
   const [tempImage, setTempImage] = useState('');
   const [tempImageOcr, setTempImageOcr] = useState('');
-  const [infoJson, setInfoJson] = useState<any>();
+  const [infoJson, setInfoJson] = useState<Object>();
   const [infoJsonOcr, setInfoJsonOcr] = useState<Object>();
   const [showButton, setShowButton] = useState(false);
   const [showButtonOcr, setShowButtonOcr] = useState(false);
@@ -218,6 +218,7 @@ export function Home(){
             <p>
               Insira a sua imagem e dentro de alguns segundos seu documento será validado!!
             </p>
+            <p> Teste agora :) </p>
           </div>
           <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
         </div>
@@ -239,13 +240,28 @@ export function Home(){
           </Carousel>
         </div> */}
 
+        <div className="mainContent-showData">
+          <div className="showData-doc">
+            <h3>Documento</h3>
+            <div className="showData-docImage">
+              <img src={tempImage} alt="imagem do documento" />
+            </div>
+          </div>
+          <div className="showData-info">
+            <h3>Dados</h3>
+            <div className="showData-infoJSON">
+              <pre>{JSON.stringify(infoJson, null, 2)}</pre>
+            </div>
+          </div>
+        </div>
+
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
           {/* O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição */}
           {showButton === false ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
-              <h3>Clique aqui para adicionar os arquivos</h3>
+              <h3>Clique ou arraste os arquivos aqui</h3>
               <input id='files' accept=".png, .jpg, .jpeg" type='file' onChange={(event: targetProps) => {
                 if(event.target.files){
                   console.log('Peguei a imagem')
@@ -266,28 +282,13 @@ export function Home(){
           }
         </div>
 
-        <div className="mainContent-showData">
-          <div className="showData-doc">
-            <h3>Documento</h3>
-            <div className="showData-docImage">
-              <img src={tempImage} alt="imagem do documento" />
-            </div>
-          </div>
-          <div className="showData-info">
-            <h3>Tipificação</h3>
-            <div className="showData-infoJSON">
-              <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
-            </div>
-          </div>
-        </div>
 {/* =================================================================================================== */}
        
         <div className="mainContent-ocr">
-          <h2>Extração de dados</h2>
+          <h3>OCR</h3>
           <img src={images[8]} alt="Imagem de explicação OCR" />
         </div>
-        <button onClick={() => console.log(infoJson)}></button>
-        {/* <div className="mainContent-showData">
+        <div className="mainContent-showData">
           <div className="showData-doc">
             <h3>Documento</h3>
             <div className="showData-docImage">
@@ -300,11 +301,11 @@ export function Home(){
               <pre>{JSON.stringify(infoJsonOcr, null, 2)}</pre>
             </div>
           </div>
-        </div> */}
+        </div>
 
-        {/* <div className="mainContent-uploadImage">
+        <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição
+          {/* O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição */}
           {showButtonOcr === false ?  
             <label htmlFor="filesOcr" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
@@ -327,7 +328,7 @@ export function Home(){
             <button id='files' onClick={handleSendImageOcr}>Enviar Imagem</button>
           </label> 
           }
-        </div> */}
+        </div>
       </main>
     </div>
   );

@@ -31,13 +31,12 @@
 
     &-introduction{
       display: flex;
-      max-width: toRem(1168);
       .text{
         display: flex;
         flex-direction: column;
         align-items: left;
 
-        padding: toRem(64) toRem(64) toRem(64) 0;
+        padding: toRem(64);
         // max-height: toRem(320);
 
         p{
@@ -68,6 +67,7 @@
       padding: toRem(39) toRem(63);
 
       display: flex;
+      order: 2;
       align-items: top;
       justify-content: space-between;
 
@@ -87,7 +87,7 @@
         flex-direction: column;
 
         width: 40%;
-        
+        height: toRem(440);
 
         &Image {
           height: 92%;
@@ -106,16 +106,15 @@
         flex-direction: column;
 
         width: 50%;
-        height: 50%;
+        height: 100%;
 
         &JSON{
-          display: flex;
-          align-items: center;
           padding: toRem(24);
           height: 100%;
 
           border: solid 1px $foxfly-color-darken;
           border-radius: toRem(10);
+          background-color:#524b4b;
 
           overflow-y: scroll;
         }
@@ -123,11 +122,12 @@
     }
 
    &-uploadImage{
-    margin: toRem(40) 0 toRem(25) 0;
+    margin: toRem(40) 0 toRem(80) 0;
 
     display: flex;
     flex-direction: column;
     align-items: center;
+    order: 1;
 
     max-width: toRem(1168);
     width: 100%;
@@ -140,7 +140,7 @@
 
       margin-top: toRem(31);
       
-      height: toRem(150);
+      height: toRem(300);
       width: 100%;
 
       border: dashed 3px $foxfly-color-medium;
@@ -150,10 +150,6 @@
       cursor: pointer;
 
       transition: all 0.1s ease-in; 
-
-      img {
-        height: toRem(50)
-      }
 
       &:hover{
         form{
@@ -165,7 +161,9 @@
       }
       
       h3{
-        max-width: toRem(250);
+        margin-top: toRem(16);
+
+        max-width: toRem(180);
 
         color: $foxfly-color-medium;
         text-align: center;
@@ -188,14 +186,13 @@
     }
     input{
       visibility: hidden;
-      display: none;
     }
    } 
 
    &-ocr {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
 
     margin-bottom: toRem(110);
     
@@ -205,7 +202,7 @@
     img{
       margin-top: toRem(31);
 
-      width: 40%;
+      width: 50%;
       height: auto;
     }
    }

@@ -276,7 +276,7 @@ export function Home(){
           <div className="showData-info">
             <h3>Tipificação</h3>
             <div className="showData-infoJSON">
-              <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
+              <p>{`Documento: ${infoJson.documento}`}</p>
             </div>
           </div>
         </div>

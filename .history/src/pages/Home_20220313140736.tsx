@@ -29,15 +29,15 @@ type ServerError = { errorMessage: string };
 
 export function Home(){
   const [selectedFile, setSelectedFile] = useState<File | undefined>();
-	const [selectedFileOcr, setSelectedFileOcr] = useState<File | undefined>();
+	const [selectedFileOtc, setSelectedFileOtc] = useState<File | undefined>();
   const [tempImage, setTempImage] = useState('');
-  const [tempImageOcr, setTempImageOcr] = useState('');
-  const [infoJson, setInfoJson] = useState<any>();
-  const [infoJsonOcr, setInfoJsonOcr] = useState<Object>();
+  const [tempImageOtc, setTempImageOtc] = useState('');
+  const [infoJson, setInfoJson] = useState<Object>();
+  const [infoJsonOtc, setInfoJsonOtc] = useState<Object>();
   const [showButton, setShowButton] = useState(false);
-  const [showButtonOcr, setShowButtonOcr] = useState(false);
+  const [showButtonOtc, setShowButtonOtc] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isLoadingOcr, setIsLoadingOcr] = useState(false);
+  const [isLoadingOtc, setIsLoadingOtc] = useState(false);
   const images = exportImages();
 
   //Objeto para tradução das propriedades da API
@@ -62,30 +62,20 @@ export function Home(){
 
   //Arquivo da imagem em tipo File vindo de um estado
   const image = selectedFile;
-  const imageOcr = selectedFileOcr;
+  const imageOtc = selectedFileOtc;
 
   async function parseImage(){
     //Verificação para saber se o File é Undefined
-    if(!image){
+    if(!image || !imageOtc){
       return
     }
     // executa a função que transforma a imagem em Base64
     const apiImage = await getBase64(image)
     const newApiImage = await apiImage.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "")
+    const apiImageOtc = await getBase64(imageOtc);
+    const newApiImageOtc = await apiImageOtc.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "")
 
-    return { newApiImage, apiImage };
-  }
-
-  async function parseImageOcr(){
-    //Verificação para saber se o File é Undefined
-    if(!imageOcr){
-      return
-    }
-
-    const apiImageOcr = await getBase64(imageOcr);
-    const newApiImageOcr = await apiImageOcr.replace("data:image/jpeg;base64,", "").replace("data:image/png;base64,", "")
-
-    return { apiImageOcr, newApiImageOcr }
+    return { newApiImage, apiImage, apiImageOtc, newApiImageOtc };
   }
 //função de post da imagem normal
   async function postImage(data: any){
@@ -116,8 +106,8 @@ export function Home(){
       return response;
   }
 
-  async function postImageOcr(data: any){
-    let response: any = '';
+  async function postImageOtc(data: any){
+    let response = '';
     const config = {
       headers : {
         'Ocp-Apim-Subscription-Key': 'a02ec92761234da5a25348d44f6bf4b0'
@@ -128,9 +118,9 @@ export function Home(){
       const res = await api.post('/fxData?code=SyvXOJzEukI5z/naFFkaJTACu7gwyRJuHaPa5u/Chr5CRxa9RShXdw==', data, config)
       response = res.data;
     } catch (error) {
-      setInfoJsonOcr(erro.erro);
-      setIsLoadingOcr(false);
-      setShowButtonOcr(!showButtonOcr);
+      setInfoJson(erro.erro);
+      setIsLoading(false);
+      setShowButton(!showButton);
       if(axios.isAxiosError(error)){
         const serverError = error as AxiosError<ServerError>;
         if (serverError && serverError.response) {
@@ -167,7 +157,7 @@ export function Home(){
 
     //Tradução das propriedades da API
     translatedInfo.probabilidade = `${pickedProps.hit.toFixed(0)}%`;
-    translatedInfo.documento = pickedProps.type.split("-", 1).toString();
+    translatedInfo.documento = pickedProps.type;
     setInfoJson(translatedInfo);
     //Estado que controla o botão de enviar ou adicionar imagem
     setIsLoading(false);
@@ -176,20 +166,19 @@ export function Home(){
     setTempImage(parsedImage?.apiImage);
   }
 
-  //Função de envio da imagem Ocr
-  async function handleSendImageOcr(){
-    setIsLoadingOcr(true);
+  //Função de envio da imagem OTC
+  async function handleSendImageOtc(){
+    setIsLoadingOtc(true);
 
-    const parsedImage = await parseImageOcr();
+    const parsedImage = await parseImage();
     //Criando um JSON Data para enviar a imagem pelo Axios
     const data = JSON.stringify({
-        "file_name": imageOcr?.name, 
-        "image_type": "CNH-Full",
-        "image": parsedImage?.newApiImageOcr
+        "file_name": imageOtc?.name, 
+        "image": parsedImage?.newApiImageOtc
     });
     console.log(data);
 
-    const response: any = await postImageOcr(data);
+    const response: any = await postImageOtc(data);
     console.log(response)
 
     // Desestruturação do Objeto para usar somente duas propriedades com uma função que chama ela mesma 
@@ -198,12 +187,12 @@ export function Home(){
     // })(response.data);
     // console.log(pickedProps);
 
-    setInfoJsonOcr(response.data);
+    setInfoJsonOtc(response.data);
     //Estado que controla o botão de enviar ou adicionar imagem
-    setIsLoadingOcr(false);
-    setShowButtonOcr(!showButtonOcr);
+    setIsLoadingOtc(false);
+    setShowButtonOtc(!showButton);
     //Estado que armazena a foto enviada em Base64 para possível uso pelo front
-    setTempImageOcr(parsedImage?.apiImageOcr);
+    setTempImageOtc(parsedImage?.apiImageOtc);
   }
 
   return(
@@ -214,10 +203,13 @@ export function Home(){
       <main className="mainContent">
         <div className="mainContent-introduction">
           <div className="text">
-            <h2>Tipificação de documentos</h2>
+            <h2>Tipificação e Extração de dados</h2>
             <p>
-              Insira a sua imagem e dentro de alguns segundos seu documento será validado!!
+              Escolha uma das imagens exemplo abaixo ou envie seus próprios 
+              arquivos. Dentro de alguns segundos você terá seu documento ajustado, 
+              tipificado e com todas as informações extraídas.
             </p>
+            <p> Teste agora :) </p>
           </div>
           <img src={images[1]} alt="Imagem de exemplo dos documentos brasileiros" />
         </div>
@@ -239,13 +231,28 @@ export function Home(){
           </Carousel>
         </div> */}
 
+        <div className="mainContent-showData">
+          <div className="showData-doc">
+            <h3>Documento</h3>
+            <div className="showData-docImage">
+              <img src={tempImage} alt="imagem do documento" />
+            </div>
+          </div>
+          <div className="showData-info">
+            <h3>Dados</h3>
+            <div className="showData-infoJSON">
+              <pre>{JSON.stringify(infoJson, null, 2)}</pre>
+            </div>
+          </div>
+        </div>
+
         <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
           {/* O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição */}
           {showButton === false ?  
             <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
-              <h3>Clique aqui para adicionar os arquivos</h3>
+              <h3>Clique ou arraste os arquivos aqui</h3>
               <input id='files' accept=".png, .jpg, .jpeg" type='file' onChange={(event: targetProps) => {
                 if(event.target.files){
                   console.log('Peguei a imagem')
@@ -266,68 +273,53 @@ export function Home(){
           }
         </div>
 
+{/* =================================================================================================== */}
+       
+        <div className="mainContent-ocr">
+          <h3>OCR</h3>
+          <img src={images[8]} alt="Imagem de explicação OCR" />
+        </div>
         <div className="mainContent-showData">
           <div className="showData-doc">
             <h3>Documento</h3>
             <div className="showData-docImage">
-              <img src={tempImage} alt="imagem do documento" />
-            </div>
-          </div>
-          <div className="showData-info">
-            <h3>Tipificação</h3>
-            <div className="showData-infoJSON">
-              <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
-            </div>
-          </div>
-        </div>
-{/* =================================================================================================== */}
-       
-        <div className="mainContent-ocr">
-          <h2>Extração de dados</h2>
-          <img src={images[8]} alt="Imagem de explicação OCR" />
-        </div>
-        <button onClick={() => console.log(infoJson)}></button>
-        {/* <div className="mainContent-showData">
-          <div className="showData-doc">
-            <h3>Documento</h3>
-            <div className="showData-docImage">
-              <img src={tempImageOcr} alt="imagem do documento" />
+              <img src={tempImageOtc} alt="imagem do documento" />
             </div>
           </div>
           <div className="showData-info">
             <h3>Dados</h3>
             <div className="showData-infoJSON">
-              <pre>{JSON.stringify(infoJsonOcr, null, 2)}</pre>
+              <pre>{JSON.stringify(infoJsonOtc, null, 2)}</pre>
             </div>
           </div>
-        </div> */}
+        </div>
 
-        {/* <div className="mainContent-uploadImage">
+        <div className="mainContent-uploadImage">
           <h3>Teste com seus arquivos</h3>
-          O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição
-          {showButtonOcr === false ?  
-            <label htmlFor="filesOcr" className="mainContent-uploadImage_content">
+          {/* O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição */}
+          {showButtonOtc === false ?  
+            <label htmlFor="files" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
-              <input id='filesOcr' accept=".png, .jpg, .jpeg" type='file' onChange={(event: targetProps) => {
+              <input id='files' accept=".png, .jpg, .jpeg" type='file' onChange={(event: targetProps) => {
                 if(event.target.files){
                   console.log('Peguei a imagem 2')
-                  setSelectedFileOcr(event.target.files[0]);
-                  setShowButtonOcr(!showButtonOcr);
+                  setSelectedFileOtc(event.target.files[0]);
+                  setShowButtonOtc(!showButtonOtc);
                 }
               }}/>
             </label>   
           :
-          isLoadingOcr ? 
+          isLoadingOtc ? 
               <label htmlFor="files" className="mainContent-uploadImage_content">
                 <ReactLoading type={'spin'} color="#FF8B63"/>
               </label> 
               :
           <label htmlFor="files" className="mainContent-uploadImage_content">
-            <button id='files' onClick={handleSendImageOcr}>Enviar Imagem</button>
+            <button id='files' onClick={handleSendImageOtc}>Enviar Imagem</button>
           </label> 
           }
-        </div> */}
+        </div>
       </main>
     </div>
   );
