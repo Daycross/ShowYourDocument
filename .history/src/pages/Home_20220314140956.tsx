@@ -32,7 +32,7 @@ export function Home(){
 	const [selectedFileOcr, setSelectedFileOcr] = useState<File | undefined>();
   const [tempImage, setTempImage] = useState('');
   const [tempImageOcr, setTempImageOcr] = useState('');
-  const [infoJson, setInfoJson] = useState<any>('');
+  const [infoJson, setInfoJson] = useState<any>();
   const [infoJsonOcr, setInfoJsonOcr] = useState<Object>();
   const [showButton, setShowButton] = useState(false);
   const [showButtonOcr, setShowButtonOcr] = useState(false);
@@ -47,7 +47,7 @@ export function Home(){
   }
 
   const erro = {
-    erro: 'A imagem não é um documento válido ou ainda não existe'
+    erro: 'A imagem não é um documento válido'
   }
 
   //Função que transforma o File em uma imagem base64
@@ -100,10 +100,9 @@ export function Home(){
       const res = await api.post('/fxType?code=NixJacw2taGwZQcXF3R3cBGYYMLAkRwCvzan38YAi7OdHzFjKxZWig==', data, config)
       response = res.data;
     } catch (error) {
-      setInfoJson(false);
+      setInfoJson(erro.erro);
       setIsLoading(false);
       setShowButton(!showButton);
-      setTempImage('');
       if(axios.isAxiosError(error)){
         const serverError = error as AxiosError<ServerError>;
         if (serverError && serverError.response) {
@@ -277,10 +276,7 @@ export function Home(){
           <div className="showData-info">
             <h3>Tipificação</h3>
             <div className="showData-infoJSON">
-              { infoJson === '' ? 
-                <p></p>
-                :
-                infoJson ? 
+              { infoJson ? 
                 <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
                 :
                 <p>{erro.erro}</p>

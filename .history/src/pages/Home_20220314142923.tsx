@@ -277,10 +277,7 @@ export function Home(){
           <div className="showData-info">
             <h3>Tipificação</h3>
             <div className="showData-infoJSON">
-              { infoJson === '' ? 
-                <p></p>
-                :
-                infoJson ? 
+              { infoJson ? 
                 <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
                 :
                 <p>{erro.erro}</p>

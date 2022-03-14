@@ -32,8 +32,8 @@ export function Home(){
 	const [selectedFileOcr, setSelectedFileOcr] = useState<File | undefined>();
   const [tempImage, setTempImage] = useState('');
   const [tempImageOcr, setTempImageOcr] = useState('');
-  const [infoJson, setInfoJson] = useState<any>('');
-  const [infoJsonOcr, setInfoJsonOcr] = useState<Object>();
+  const [infoJson, setInfoJson] = useState<any>();
+  const [infoJsonOcr, setInfoJsonOcr] = useState<Object>('');
   const [showButton, setShowButton] = useState(false);
   const [showButtonOcr, setShowButtonOcr] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -277,10 +277,7 @@ export function Home(){
           <div className="showData-info">
             <h3>Tipificação</h3>
             <div className="showData-infoJSON">
-              { infoJson === '' ? 
-                <p></p>
-                :
-                infoJson ? 
+              { infoJson ? 
                 <p>{`Documento: ${infoJson.documento}`}<br/>{`Probabilidade de Acerto: ${infoJson.probabilidade}`}</p>
                 :
                 <p>{erro.erro}</p>
