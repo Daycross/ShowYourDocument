@@ -32,12 +32,12 @@
     &-introduction{
       display: flex;
       max-width: toRem(1168);
-      @media (max-width: 767px) {
+      @media (min-width: 767px) {
         flex-direction: column;
         align-items: center;
         max-width: toRem(340);
       }
-      @media (min-width: 800px) and (max-width: 1080px) {
+      @media (min-width: 1080px) {
         max-width: toRem(750);
       }
       
@@ -47,10 +47,10 @@
         align-items: left;
 
         padding: toRem(64) toRem(64) toRem(64) 0;
-        @media (max-width: 767px) {
+        @media (min-width: 767px) {
           padding: toRem(40) toRem(0) toRem(40) toRem(0);
         }
-        @media (min-width: 800px) and (max-width: 1080px) {
+        @media (min-width: 1080px) {
           padding: toRem(40) toRem(0) toRem(40) toRem(0);
         }
         
@@ -67,10 +67,10 @@
         border: 3px inset rgba(47, 51, 48, 0.1);
         border-top: 0;
 
-        @media (max-width: 767px) {
+        @media (min-width: 767px) {
           max-width: toRem(340);
         }
-        @media (min-width: 800px) and (max-width: 1080px) {
+        @media (min-width: 1080px) {
           max-width: toRem(340);
         }
       }
@@ -99,11 +99,11 @@
       border: solid 1px $foxfly-color-darken;
       border-radius: toRem(10);
       
-      @media (max-width: 767px) {
+      @media (min-width: 767px) {
         max-width: toRem(340);
         padding: toRem(19) toRem(21);
       }
-      @media (min-width: 800px) and (max-width: 1080px) {
+      @media (min-width: 1080px) {
         max-width: toRem(750);
         padding: toRem(19) toRem(21);
       }
@@ -148,10 +148,10 @@
 
           overflow-y: scroll;
 
-          @media (max-width: 767px) {
-            padding: toRem(12); 
+          @media (min-width: 767px) {
+            padding: toRem(12);
           }
-          @media (min-width: 800px) and (max-width: 1080px) {
+          @media (min-width: 1080px) {
             padding: toRem(12);
           }
         }
@@ -171,10 +171,10 @@
 
     max-width: toRem(1168);
     width: 100%;
-    @media (max-width: 767px) {
+    @media (min-width: 767px) {
       max-width: toRem(340);
     }
-    @media (min-width: 800px) and (max-width: 1080px) {
+    @media (min-width: 1080px) {
       max-width: toRem(750);
     }
     
@@ -276,17 +276,17 @@
     max-width: toRem(1168);
     width: 100%;
 
-    @media (max-width: 767px) {
+    @media (min-width: 767px) {
       max-width: toRem(340);
     }
-    @media (min-width: 800px) and (max-width: 1080px) {
+    @media (min-width: 1080px) {
       max-width: toRem(750);
     }
 
     img{
       margin-top: toRem(31);
 
-      @media (max-width: 767px) {
+      @media (min-width: 767px) {
         margin-top: 0;
       }
 
