@@ -130,7 +130,6 @@ export function Home(){
       const res = await api.post('/fxData?code=SyvXOJzEukI5z/naFFkaJTACu7gwyRJuHaPa5u/Chr5CRxa9RShXdw==', data, config)
       response = res.data;
     } catch (error) {
-      console.log(error);
       setInfoJsonOcr(erro.erro);
       setIsLoadingOcr(false);
       setShowButtonOcr(!showButtonOcr);
@@ -191,7 +190,7 @@ export function Home(){
     //Criando um JSON Data para enviar a imagem pelo Axios
     const data = JSON.stringify({
         "file_name": imageOcr?.name, 
-        "image_type": documentType,
+        "image_type": "CNH-Full",
         "image": parsedImage?.newApiImageOcr
     });
     console.log(data);
@@ -307,13 +306,13 @@ export function Home(){
           <div className="mainContent-uploadImage-radio">
             <p>Escolha o tipo de documento antes de enviar uma imagem:</p>
             <div className="radio-item">
-              <input type="radio" id="rg" name="drone" value="RG-" onChange={(event: targetProps) => {
+              <input type="radio" id="rg" name="drone" value="rg" onChange={(event: targetProps) => {
                 setDocumentType(event.target.value);
               }}/>
               <label htmlFor="rg">RG</label>
             </div>
             <div className="radio-item">
-              <input type="radio" id="cnh" name="drone" value="CNH" onChange={(event: targetProps) => {
+              <input type="radio" id="cnh" name="drone" value="cnh" onChange={(event: targetProps) => {
                 setDocumentType(event.target.value);
               }} />
               <label htmlFor="cnh">CNH</label>
@@ -322,7 +321,7 @@ export function Home(){
           
           {/* O Ternário mostra na tela Adicionar arquivos OU enviar OU o loading dependendo da condição */}
           {showButtonOcr === false ?  
-            <label htmlFor="filesOcr" className="mainContent-uploadImage_content contentWM">
+            <label htmlFor="filesOcr" className="mainContent-uploadImage_content">
               <img src={images[7]} alt="Ícone de Upload" />
               <h3>Clique ou arraste os arquivos aqui</h3>
               <input id='filesOcr' accept=".png, .jpg, .jpeg" type='file' onChange={(event: targetProps) => {

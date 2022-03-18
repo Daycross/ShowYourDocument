@@ -35,12 +35,9 @@
       @media (max-width: 767px) {
         flex-direction: column;
         align-items: center;
+
         max-width: toRem(340);
       }
-      @media (max-width: 1080px) {
-        max-width: toRem(750);
-      }
-      
       .text{
         display: flex;
         flex-direction: column;
@@ -50,10 +47,9 @@
         @media (max-width: 767px) {
           padding: toRem(40) toRem(0) toRem(40) toRem(0);
         }
-        @media (max-width: 1080px) {
-          padding: toRem(40) toRem(0) toRem(40) toRem(0);
-        }
         
+        
+
         p{
           padding-top: toRem(24);
           font-size: toRem(19);
@@ -68,9 +64,6 @@
         border-top: 0;
 
         @media (max-width: 767px) {
-          max-width: toRem(340);
-        }
-        @media (max-width: 1080px) {
           max-width: toRem(340);
         }
       }
@@ -101,10 +94,6 @@
       
       @media (max-width: 767px) {
         max-width: toRem(340);
-        padding: toRem(19) toRem(21);
-      }
-      @media (max-width: 1080px) {
-        max-width: toRem(750);
         padding: toRem(19) toRem(21);
       }
 
@@ -151,9 +140,6 @@
           @media (max-width: 767px) {
             padding: toRem(12);
           }
-          @media (max-width: 1080px) {
-            padding: toRem(12);
-          }
         }
       }
     }
@@ -173,9 +159,6 @@
     width: 100%;
     @media (max-width: 767px) {
       max-width: toRem(340);
-    }
-    @media (max-width: 1080px) {
-      max-width: toRem(750);
     }
     
     &-radio{
@@ -278,9 +261,6 @@
 
     @media (max-width: 767px) {
       max-width: toRem(340);
-    }
-    @media (max-width: 1080px) {
-      max-width: toRem(750);
     }
 
     img{

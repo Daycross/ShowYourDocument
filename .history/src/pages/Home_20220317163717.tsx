@@ -307,13 +307,13 @@ export function Home(){
           <div className="mainContent-uploadImage-radio">
             <p>Escolha o tipo de documento antes de enviar uma imagem:</p>
             <div className="radio-item">
-              <input type="radio" id="rg" name="drone" value="RG-" onChange={(event: targetProps) => {
+              <input type="radio" id="rg" name="drone" value="RG-Full" onChange={(event: targetProps) => {
                 setDocumentType(event.target.value);
               }}/>
               <label htmlFor="rg">RG</label>
             </div>
             <div className="radio-item">
-              <input type="radio" id="cnh" name="drone" value="CNH" onChange={(event: targetProps) => {
+              <input type="radio" id="cnh" name="drone" value="CNH-Full" onChange={(event: targetProps) => {
                 setDocumentType(event.target.value);
               }} />
               <label htmlFor="cnh">CNH</label>

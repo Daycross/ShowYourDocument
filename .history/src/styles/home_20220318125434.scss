@@ -34,13 +34,7 @@
       max-width: toRem(1168);
       @media (max-width: 767px) {
         flex-direction: column;
-        align-items: center;
-        max-width: toRem(340);
       }
-      @media (max-width: 1080px) {
-        max-width: toRem(750);
-      }
-      
       .text{
         display: flex;
         flex-direction: column;
@@ -48,12 +42,10 @@
 
         padding: toRem(64) toRem(64) toRem(64) 0;
         @media (max-width: 767px) {
-          padding: toRem(40) toRem(0) toRem(40) toRem(0);
-        }
-        @media (max-width: 1080px) {
-          padding: toRem(40) toRem(0) toRem(40) toRem(0);
+          padding: toRem(64) toRem(64) toRem(64) toRem(80);
         }
         
+
         p{
           padding-top: toRem(24);
           font-size: toRem(19);
@@ -68,10 +60,7 @@
         border-top: 0;
 
         @media (max-width: 767px) {
-          max-width: toRem(340);
-        }
-        @media (max-width: 1080px) {
-          max-width: toRem(340);
+          max-width: toRem(380);
         }
       }
     }
@@ -98,15 +87,6 @@
 
       border: solid 1px $foxfly-color-darken;
       border-radius: toRem(10);
-      
-      @media (max-width: 767px) {
-        max-width: toRem(340);
-        padding: toRem(19) toRem(21);
-      }
-      @media (max-width: 1080px) {
-        max-width: toRem(750);
-        padding: toRem(19) toRem(21);
-      }
 
       h3{
         margin-bottom: toRem(8);
@@ -147,13 +127,6 @@
           border-radius: toRem(10);
 
           overflow-y: scroll;
-
-          @media (max-width: 767px) {
-            padding: toRem(12);
-          }
-          @media (max-width: 1080px) {
-            padding: toRem(12);
-          }
         }
       }
     }
@@ -171,13 +144,7 @@
 
     max-width: toRem(1168);
     width: 100%;
-    @media (max-width: 767px) {
-      max-width: toRem(340);
-    }
-    @media (max-width: 1080px) {
-      max-width: toRem(750);
-    }
-    
+
     &-radio{
       display: flex;
       align-items: center;
@@ -272,23 +239,14 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    
     
     max-width: toRem(1168);
     width: 100%;
 
-    @media (max-width: 767px) {
-      max-width: toRem(340);
-    }
-    @media (max-width: 1080px) {
-      max-width: toRem(750);
-    }
-
     img{
       margin-top: toRem(31);
-
-      @media (max-width: 767px) {
-        margin-top: 0;
-      }
 
       width: 40%;
       height: auto;

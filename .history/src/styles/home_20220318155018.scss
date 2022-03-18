@@ -103,10 +103,6 @@
         max-width: toRem(340);
         padding: toRem(19) toRem(21);
       }
-      @media (max-width: 1080px) {
-        max-width: toRem(750);
-        padding: toRem(19) toRem(21);
-      }
 
       h3{
         margin-bottom: toRem(8);
@@ -149,9 +145,6 @@
           overflow-y: scroll;
 
           @media (max-width: 767px) {
-            padding: toRem(12);
-          }
-          @media (max-width: 1080px) {
             padding: toRem(12);
           }
         }
@@ -278,9 +271,6 @@
 
     @media (max-width: 767px) {
       max-width: toRem(340);
-    }
-    @media (max-width: 1080px) {
-      max-width: toRem(750);
     }
 
     img{

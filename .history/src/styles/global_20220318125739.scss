@@ -24,9 +24,6 @@ h1, h2, h3{
 h2{
   font-size: toRem(36);
   @media (max-width: 767px) {
-    font-size: toRem(26);
-  }
-  @media (max-width: 1080px) {
     font-size: toRem(26)
   }
 }
@@ -37,15 +34,6 @@ h3{
 
 p {
   font-size: toRem(18);
-  @media (max-width: 767px) {
-    font-size: toRem(12) !important;
-  }
-  @media (max-width: 1080px) {
-    font-size: toRem(16) !important;
-  }
-}
-
-label {
   @media (max-width: 767px) {
     font-size: toRem(12) !important;
   }
